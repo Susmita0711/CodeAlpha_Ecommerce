@@ -1,0 +1,660 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BharatKart — India's Tech & Lifestyle Store (CodeAlpha Project)</title>
+  <meta name="description" content="A fullstack Indian e-commerce store with real-time shopping cart, product details, user authentication, UPI/RuPay payment simulation, and order processing for CodeAlpha Internship.">
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- FontAwesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- Top Announcement Bar (Indian Festive & Internship Theme) -->
+  <div class="announcement-bar">
+    <div class="container announcement-content">
+      <div class="internship-badge">
+        <span>🇮🇳</span>
+        <span>CodeAlpha Fullstack Development Internship Project</span>
+      </div>
+      <div class="announcement-promo">
+        <span>🪔 Festive Sale: Use coupon <strong>DIWALI20</strong> for 20% OFF or <strong>CODEALPHA10</strong> for 10% OFF!</span>
+      </div>
+      <div class="announcement-links">
+        <span class="delivery-perk"><i class="fa-solid fa-truck-fast"></i> Free Delivery above ₹999</span>
+        <span class="status-indicator"><i class="fa-solid fa-circle"></i> API Online</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Header / Navigation -->
+  <header class="site-header" id="site-header">
+    <div class="container header-container">
+      <!-- Logo -->
+      <a href="#" class="brand-logo" id="brand-logo">
+        <div class="logo-icon"><i class="fa-solid fa-bag-shopping"></i></div>
+        <div class="logo-text">
+          <span class="logo-title">Bharat<span class="text-accent">Kart</span></span>
+          <span class="logo-sub">CodeAlpha India</span>
+        </div>
+      </a>
+
+      <!-- Search Bar -->
+      <div class="header-search">
+        <i class="fa-solid fa-magnifying-glass search-icon"></i>
+        <input type="text" id="global-search-input" placeholder="Search boAt, Noise smartwatch, Cosmic Byte, Wildcraft..." autocomplete="off">
+        <button class="clear-search-btn" id="clear-search-btn" title="Clear Search" style="display: none;">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+
+      <!-- Action Buttons -->
+      <div class="header-actions">
+        <!-- User Account / Auth Button -->
+        <div class="auth-wrapper" id="auth-wrapper">
+          <button class="btn btn-outline-auth" id="auth-btn">
+            <i class="fa-regular fa-user"></i>
+            <span id="auth-btn-text">Sign In</span>
+          </button>
+          
+          <!-- Logged In User Dropdown -->
+          <div class="user-dropdown-menu" id="user-dropdown-menu">
+            <div class="dropdown-header">
+              <div class="user-avatar" id="user-avatar-initials">RS</div>
+              <div class="user-info">
+                <span class="user-name" id="dropdown-user-name">Rahul Sharma</span>
+                <span class="user-email" id="dropdown-user-email">rahul@codealpha.in</span>
+              </div>
+            </div>
+            <div class="dropdown-divider"></div>
+            <button class="dropdown-item" id="dropdown-my-orders-btn">
+              <i class="fa-solid fa-box-open"></i> My Orders
+            </button>
+            <button class="dropdown-item text-danger" id="dropdown-logout-btn">
+              <i class="fa-solid fa-arrow-right-from-bracket"></i> Sign Out
+            </button>
+          </div>
+        </div>
+
+        <!-- Orders Button (Quick Access) -->
+        <button class="action-btn" id="my-orders-quick-btn" title="My Orders">
+          <i class="fa-solid fa-clock-rotate-left"></i>
+          <span class="action-label">Orders</span>
+        </button>
+
+        <!-- Cart Button with Counter -->
+        <button class="action-btn cart-btn" id="header-cart-btn" title="View Cart">
+          <div class="cart-icon-wrap">
+            <i class="fa-solid fa-cart-shopping"></i>
+            <span class="cart-badge" id="cart-badge-count">0</span>
+          </div>
+          <span class="cart-total-text" id="header-cart-total">₹0</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero Banner (Indian Curated Tech & Lifestyle) -->
+  <section class="hero-section">
+    <div class="container hero-container">
+      <div class="hero-content">
+        <span class="hero-tag"><i class="fa-solid fa-fire text-warning"></i> 🇮🇳 India's Great Festive Showcase</span>
+        <h1 class="hero-title">Experience the Next Generation of Everyday Tech & Essentials</h1>
+        <p class="hero-description">
+          Curated for Indian students, developers, and creators. Explore trending audio, smartwatches, mechanical keyboards, and artisan desk gear with instant UPI payment.
+        </p>
+        <div class="hero-actions">
+          <a href="#catalog-section" class="btn btn-primary btn-lg">
+            <span>Explore All Deals</span>
+            <i class="fa-solid fa-arrow-down"></i>
+          </a>
+          <button class="btn btn-glass btn-lg" id="quick-demo-login-btn">
+            <i class="fa-solid fa-user-check"></i>
+            <span>1-Click Demo Login (Rahul)</span>
+          </button>
+        </div>
+      </div>
+      <div class="hero-highlights">
+        <div class="highlight-card">
+          <div class="highlight-icon"><i class="fa-solid fa-truck-fast"></i></div>
+          <div>
+            <h4>Free Express Delivery</h4>
+            <p>Across 19,000+ PIN codes on orders above ₹999</p>
+          </div>
+        </div>
+        <div class="highlight-card">
+          <div class="highlight-icon"><i class="fa-solid fa-qrcode"></i></div>
+          <div>
+            <h4>Instant UPI & RuPay</h4>
+            <p>Google Pay, PhonePe, Paytm, BHIM & Netbanking</p>
+          </div>
+        </div>
+        <div class="highlight-card">
+          <div class="highlight-icon"><i class="fa-solid fa-hand-holding-dollar"></i></div>
+          <div>
+            <h4>Cash on Delivery (COD)</h4>
+            <p>Pay conveniently right at your doorstep</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Main Store Section -->
+  <main class="store-main container" id="catalog-section">
+    <!-- Filters & Category Navigation Bar -->
+    <div class="catalog-header">
+      <div class="category-pills" id="category-pills-container">
+        <!-- Rendered dynamically -->
+        <button class="category-pill active" data-category="all">
+          <i class="fa-solid fa-border-all"></i> All Products
+        </button>
+      </div>
+
+      <div class="catalog-controls">
+        <div class="sort-control">
+          <label for="sort-select"><i class="fa-solid fa-arrow-down-short-wide"></i> Sort By:</label>
+          <select id="sort-select" class="form-select">
+            <option value="newest">Featured / Newest</option>
+            <option value="price_asc">Price: Low to High</option>
+            <option value="price_desc">Price: High to Low</option>
+            <option value="rating">Customer Rating</option>
+            <option value="reviews">Popularity (Most Reviewed)</option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <!-- Active Filters & Stats Bar -->
+    <div class="catalog-status-bar">
+      <div class="results-count" id="results-count-text">Showing all products</div>
+      <div class="active-filter-tags" id="active-filter-tags"></div>
+    </div>
+
+    <!-- Products Grid -->
+    <div class="products-grid" id="products-grid">
+      <!-- Loading Skeleton / Items will be populated by JS -->
+      <div class="grid-loader">
+        <div class="spinner"></div>
+        <p>Fetching products from Indian catalog...</p>
+      </div>
+    </div>
+
+    <!-- Empty State -->
+    <div class="empty-state" id="empty-products-state" style="display: none;">
+      <i class="fa-solid fa-box-open empty-icon"></i>
+      <h3>No products found</h3>
+      <p>We couldn't find anything matching your search criteria. Try a different keyword or reset filters.</p>
+      <button class="btn btn-primary" id="reset-filters-btn">Reset All Filters</button>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="container footer-container">
+      <div class="footer-col brand-col">
+        <div class="brand-logo footer-logo">
+          <div class="logo-icon"><i class="fa-solid fa-bag-shopping"></i></div>
+          <span class="logo-title">Bharat<span class="text-accent">Kart</span></span>
+        </div>
+        <p class="footer-desc">
+          A full-featured Indian Fullstack E-Commerce store built with HTML5, Vanilla CSS3, JavaScript, Node.js, Express, and SQLite for CodeAlpha Internship evaluation.
+        </p>
+        <div class="footer-badges">
+          <span class="tech-tag">Node.js</span>
+          <span class="tech-tag">Express.js</span>
+          <span class="tech-tag">SQLite3</span>
+          <span class="tech-tag">UPI Ready</span>
+          <span class="tech-tag">JWT Auth</span>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Indian Payment Ecosystem</h4>
+        <ul class="footer-links">
+          <li><i class="fa-solid fa-check text-accent"></i> UPI (GPay, PhonePe, Paytm, BHIM)</li>
+          <li><i class="fa-solid fa-check text-accent"></i> RuPay, Visa, Mastercard</li>
+          <li><i class="fa-solid fa-check text-accent"></i> Net Banking (SBI, HDFC, ICICI, Axis)</li>
+          <li><i class="fa-solid fa-check text-accent"></i> Cash on Delivery (COD)</li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Project Architecture</h4>
+        <ul class="footer-links">
+          <li><i class="fa-solid fa-check text-accent"></i> Bcrypt Password Hashing</li>
+          <li><i class="fa-solid fa-check text-accent"></i> JWT Stateless Authentication</li>
+          <li><i class="fa-solid fa-check text-accent"></i> Live Stock Inventory Control</li>
+          <li><i class="fa-solid fa-check text-accent"></i> Order Processing & Receipts</li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="container footer-bottom-inner">
+        <p>© 2026 BharatKart. Crafted with ❤️ in India for CodeAlpha Internship.</p>
+        <p class="built-with">All prices inclusive of GST | Fast Pan-India Delivery</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ================= MODALS & DRAWERS ================= -->
+
+  <!-- 1. Product Details Modal -->
+  <div class="modal-overlay" id="product-modal-overlay">
+    <div class="modal-content product-modal" id="product-modal-content">
+      <button class="modal-close-btn" id="close-product-modal" title="Close">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+      <div class="product-modal-body" id="product-modal-body">
+        <!-- Rendered dynamically -->
+      </div>
+    </div>
+  </div>
+
+  <!-- 2. Shopping Cart Slide-over Drawer -->
+  <div class="drawer-overlay" id="cart-drawer-overlay">
+    <div class="cart-drawer" id="cart-drawer">
+      <div class="drawer-header">
+        <div class="drawer-title">
+          <i class="fa-solid fa-cart-shopping"></i>
+          <h3>Shopping Cart</h3>
+          <span class="drawer-count-badge" id="drawer-items-count">0 items</span>
+        </div>
+        <button class="modal-close-btn" id="close-cart-drawer" title="Close Cart">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+
+      <!-- Free Delivery Progress (₹999 Target) -->
+      <div class="shipping-progress-box" id="shipping-progress-box">
+        <div class="shipping-progress-text" id="shipping-progress-text">
+          Add <strong id="shipping-remaining-amount">₹999</strong> more for <strong>FREE Delivery!</strong>
+        </div>
+        <div class="shipping-progress-bar">
+          <div class="shipping-progress-fill" id="shipping-progress-fill" style="width: 0%;"></div>
+        </div>
+      </div>
+
+      <!-- Cart Items List -->
+      <div class="cart-items-list" id="cart-items-container">
+        <!-- Populated dynamically -->
+      </div>
+
+      <!-- Cart Empty View -->
+      <div class="cart-empty" id="cart-empty-view" style="display: none;">
+        <div class="cart-empty-icon"><i class="fa-solid fa-bag-shopping"></i></div>
+        <h4>Your shopping bag is empty</h4>
+        <p>Explore our trending festive deals and add items to your cart.</p>
+        <button class="btn btn-primary" id="cart-start-shopping-btn">Explore Deals</button>
+      </div>
+
+      <!-- Cart Summary Footer -->
+      <div class="drawer-footer" id="cart-footer">
+        <!-- Promo Coupon Input -->
+        <div class="promo-box">
+          <input type="text" id="promo-code-input" placeholder="Coupon (e.g. DIWALI20 or CODEALPHA10)" uppercase>
+          <button class="btn btn-sm btn-outline" id="apply-promo-btn">Apply</button>
+        </div>
+        <div class="promo-feedback" id="promo-feedback"></div>
+
+        <div class="summary-line">
+          <span>Subtotal (MRP Incl. GST)</span>
+          <span id="cart-subtotal-val">₹0</span>
+        </div>
+        <div class="summary-line discount-line" id="discount-summary-line" style="display: none;">
+          <span>Coupon Discount</span>
+          <span id="cart-discount-val" class="text-success">-₹0</span>
+        </div>
+        <div class="summary-line">
+          <span>Delivery Charges</span>
+          <span id="cart-shipping-val">₹0</span>
+        </div>
+        <div class="summary-divider"></div>
+        <div class="summary-line total-line">
+          <span>Total Amount</span>
+          <span id="cart-total-val">₹0</span>
+        </div>
+
+        <button class="btn btn-primary btn-block btn-checkout" id="proceed-checkout-btn">
+          <span>Proceed to Checkout</span>
+          <i class="fa-solid fa-arrow-right"></i>
+        </button>
+        <button class="btn btn-outline-danger btn-block btn-sm" id="clear-cart-btn">
+          <i class="fa-regular fa-trash-can"></i> Clear Cart
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 3. Checkout Modal (Indian Format & Payment Options) -->
+  <div class="modal-overlay" id="checkout-modal-overlay">
+    <div class="modal-content checkout-modal">
+      <button class="modal-close-btn" id="close-checkout-modal" title="Close Checkout">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+
+      <div class="checkout-header">
+        <div class="checkout-steps">
+          <div class="step-indicator active" id="step-dot-1">
+            <span class="step-num">1</span>
+            <span class="step-name">Delivery</span>
+          </div>
+          <div class="step-line"></div>
+          <div class="step-indicator" id="step-dot-2">
+            <span class="step-num">2</span>
+            <span class="step-name">Payment</span>
+          </div>
+          <div class="step-line"></div>
+          <div class="step-indicator" id="step-dot-3">
+            <span class="step-num">3</span>
+            <span class="step-name">Confirmation</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="checkout-modal-body">
+        <form id="checkout-form">
+          <!-- Step 1: Delivery Address -->
+          <div class="checkout-step-pane active" id="checkout-step-1">
+            <h3 class="pane-title"><i class="fa-solid fa-location-dot"></i> Delivery Address & Contact</h3>
+            <p class="pane-subtitle">Enter your delivery address across India.</p>
+
+            <div class="form-row">
+              <div class="form-group col-12">
+                <label for="checkout-name">Full Name *</label>
+                <input type="text" id="checkout-name" class="form-control" placeholder="Rahul Sharma" required>
+              </div>
+            </div>
+
+            <div class="form-row two-cols">
+              <div class="form-group">
+                <label for="checkout-email">Email Address *</label>
+                <input type="email" id="checkout-email" class="form-control" placeholder="rahul@codealpha.in" required>
+              </div>
+              <div class="form-group">
+                <label for="checkout-phone">Mobile Number (+91) *</label>
+                <input type="tel" id="checkout-phone" class="form-control" placeholder="+91 98765 43210" value="+91 98765 43210" required>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="checkout-address">Flat / House No., Street, Landmark *</label>
+              <input type="text" id="checkout-address" class="form-control" placeholder="Flat 402, Shanti Heights, 100 Feet Road, Indiranagar" required>
+            </div>
+
+            <div class="form-row two-cols">
+              <div class="form-group">
+                <label for="checkout-city">City / District & State *</label>
+                <input type="text" id="checkout-city" class="form-control" placeholder="Bengaluru, Karnataka" required>
+              </div>
+              <div class="form-group">
+                <label for="checkout-zip">PIN Code (6 Digits) *</label>
+                <input type="text" id="checkout-zip" class="form-control" placeholder="560038" maxlength="6" required>
+              </div>
+            </div>
+
+            <div class="checkout-actions">
+              <button type="button" class="btn btn-outline" id="back-to-cart-from-checkout">Back to Cart</button>
+              <button type="button" class="btn btn-primary" id="btn-next-to-payment">
+                <span>Select Payment</span>
+                <i class="fa-solid fa-arrow-right"></i>
+              </button>
+            </div>
+          </div>
+
+          <!-- Step 2: Payment Method (UPI, RuPay, COD) -->
+          <div class="checkout-step-pane" id="checkout-step-2">
+            <h3 class="pane-title"><i class="fa-solid fa-shield-halved"></i> Choose Payment Method</h3>
+            <p class="pane-subtitle">100% Secure Indian Payment Gateway (Simulated Sandbox).</p>
+
+            <div class="payment-options">
+              <!-- UPI Option -->
+              <label class="payment-card-option selected">
+                <input type="radio" name="payment_method" value="UPI (Google Pay / PhonePe / Paytm)" checked>
+                <div class="option-icon"><i class="fa-solid fa-qrcode"></i></div>
+                <div class="option-details">
+                  <div class="option-badge-row">
+                    <strong>Instant UPI Payment</strong>
+                    <span class="badge-fast">Fastest</span>
+                  </div>
+                  <span>Google Pay, PhonePe, Paytm, BHIM, Cred UPI</span>
+                </div>
+              </label>
+
+              <!-- Cards Option -->
+              <label class="payment-card-option">
+                <input type="radio" name="payment_method" value="RuPay / Debit / Credit Card">
+                <div class="option-icon"><i class="fa-regular fa-credit-card"></i></div>
+                <div class="option-details">
+                  <strong>RuPay / Visa / Mastercard</strong>
+                  <span>All Indian Debit & Credit Cards (Domestic & Int.)</span>
+                </div>
+              </label>
+
+              <!-- Netbanking Option -->
+              <label class="payment-card-option">
+                <input type="radio" name="payment_method" value="Net Banking (SBI / HDFC / ICICI)">
+                <div class="option-icon"><i class="fa-solid fa-building-columns"></i></div>
+                <div class="option-details">
+                  <strong>Net Banking</strong>
+                  <span>SBI, HDFC Bank, ICICI Bank, Axis Bank, PNB</span>
+                </div>
+              </label>
+
+              <!-- Cash on Delivery -->
+              <label class="payment-card-option">
+                <input type="radio" name="payment_method" value="Cash on Delivery (COD)">
+                <div class="option-icon"><i class="fa-solid fa-money-bill-wave"></i></div>
+                <div class="option-details">
+                  <strong>Cash on Delivery (COD)</strong>
+                  <span>Pay cash or scan QR at your doorstep</span>
+                </div>
+              </label>
+            </div>
+
+            <!-- UPI Simulation Input Box -->
+            <div class="simulated-payment-box" id="upi-details-box">
+              <div class="form-group">
+                <label>Enter Virtual Payment Address (UPI ID)</label>
+                <div class="input-icon-wrap">
+                  <i class="fa-solid fa-at"></i>
+                  <input type="text" class="form-control" id="upi-id-input" placeholder="mobile@upi / rahul@okaxis" value="rahul@okaxis">
+                </div>
+                <small class="text-muted"><i class="fa-solid fa-shield"></i> You will receive a simulated payment request in your UPI app.</small>
+              </div>
+            </div>
+
+            <!-- Simulated Card Inputs -->
+            <div class="simulated-payment-box" id="card-details-box" style="display: none;">
+              <div class="form-group">
+                <label>RuPay / Visa / Mastercard Number</label>
+                <div class="card-input-wrapper">
+                  <input type="text" class="form-control" placeholder="6074 •••• •••• 9812" value="6074 8821 3411 9812">
+                  <span class="rupay-tag">RuPay</span>
+                </div>
+              </div>
+              <div class="form-row two-cols">
+                <div class="form-group">
+                  <label>Valid Thru (MM/YY)</label>
+                  <input type="text" class="form-control" placeholder="MM/YY" value="08/29">
+                </div>
+                <div class="form-group">
+                  <label>CVV (3 Digits)</label>
+                  <input type="password" class="form-control" placeholder="•••" value="842" maxlength="3">
+                </div>
+              </div>
+            </div>
+
+            <!-- Order Total Recap -->
+            <div class="checkout-recap-box">
+              <div class="recap-row">
+                <span>Items Subtotal:</span>
+                <span id="checkout-subtotal-val">₹0</span>
+              </div>
+              <div class="recap-row text-success" id="checkout-discount-row" style="display: none;">
+                <span>Festive Coupon Discount:</span>
+                <span id="checkout-discount-val">-₹0</span>
+              </div>
+              <div class="recap-row">
+                <span>Pan-India Delivery:</span>
+                <span id="checkout-shipping-val">₹0</span>
+              </div>
+              <div class="recap-row recap-total">
+                <span>Total Payable:</span>
+                <span id="checkout-total-val" class="highlight-total">₹0</span>
+              </div>
+            </div>
+
+            <div class="checkout-actions">
+              <button type="button" class="btn btn-outline" id="btn-back-to-shipping">Back to Address</button>
+              <button type="submit" class="btn btn-success btn-lg" id="btn-place-order">
+                <i class="fa-solid fa-lock"></i>
+                <span id="btn-place-order-text">Pay & Place Order</span>
+              </button>
+            </div>
+          </div>
+        </form>
+
+        <!-- Step 3: Order Success Screen -->
+        <div class="checkout-step-pane" id="checkout-step-3">
+          <div class="order-success-screen">
+            <div class="success-icon-animation">
+              <i class="fa-solid fa-check"></i>
+            </div>
+            <h2>Order Placed Successfully! 🎉</h2>
+            <p class="success-sub">Dhanyawad! Your order is confirmed and will be dispatched within 24 hours.</p>
+
+            <div class="order-receipt-card" id="order-receipt-card">
+              <!-- Rendered dynamically -->
+            </div>
+
+            <div class="receipt-actions">
+              <button class="btn btn-outline" id="view-my-orders-after-order">
+                <i class="fa-solid fa-box-open"></i> View My Orders
+              </button>
+              <button class="btn btn-primary" id="continue-shopping-btn">
+                <i class="fa-solid fa-bag-shopping"></i> Continue Shopping
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 4. Auth Modal (Login / Register) -->
+  <div class="modal-overlay" id="auth-modal-overlay">
+    <div class="modal-content auth-modal">
+      <button class="modal-close-btn" id="close-auth-modal" title="Close">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+
+      <div class="auth-tabs">
+        <button class="auth-tab-btn active" id="tab-login-btn">Sign In</button>
+        <button class="auth-tab-btn" id="tab-register-btn">Create Account</button>
+      </div>
+
+      <!-- Quick 1-Click Demo Fill Banner -->
+      <div class="demo-account-hint">
+        <span>💡 CodeAlpha Reviewer?</span>
+        <button class="btn btn-xs btn-outline-primary" id="fill-demo-credentials-btn">
+          Fill Demo User (Rahul)
+        </button>
+      </div>
+
+      <!-- Login Form -->
+      <form id="login-form" class="auth-form active">
+        <div class="form-group">
+          <label for="login-email">Email Address</label>
+          <div class="input-icon-wrap">
+            <i class="fa-regular fa-envelope"></i>
+            <input type="email" id="login-email" class="form-control" placeholder="rahul@codealpha.in" required>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="login-password">Password</label>
+          <div class="input-icon-wrap">
+            <i class="fa-solid fa-lock"></i>
+            <input type="password" id="login-password" class="form-control" placeholder="••••••••" required>
+          </div>
+        </div>
+
+        <div class="auth-error-msg" id="login-error-msg"></div>
+
+        <button type="submit" class="btn btn-primary btn-block" id="login-submit-btn">
+          Sign In to BharatKart
+        </button>
+      </form>
+
+      <!-- Register Form -->
+      <form id="register-form" class="auth-form">
+        <div class="form-group">
+          <label for="register-name">Full Name</label>
+          <div class="input-icon-wrap">
+            <i class="fa-regular fa-user"></i>
+            <input type="text" id="register-name" class="form-control" placeholder="Rahul Sharma" required>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="register-email">Email Address</label>
+          <div class="input-icon-wrap">
+            <i class="fa-regular fa-envelope"></i>
+            <input type="email" id="register-email" class="form-control" placeholder="name@domain.in" required>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="register-password">Password (min 6 chars)</label>
+          <div class="input-icon-wrap">
+            <i class="fa-solid fa-lock"></i>
+            <input type="password" id="register-password" class="form-control" placeholder="At least 6 characters" minlength="6" required>
+          </div>
+        </div>
+
+        <div class="auth-error-msg" id="register-error-msg"></div>
+
+        <button type="submit" class="btn btn-primary btn-block" id="register-submit-btn">
+          Create BharatKart Account
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- 5. My Orders Modal -->
+  <div class="modal-overlay" id="orders-modal-overlay">
+    <div class="modal-content orders-modal">
+      <div class="modal-header">
+        <div class="modal-title">
+          <i class="fa-solid fa-clock-rotate-left"></i>
+          <h3>My Orders History</h3>
+        </div>
+        <button class="modal-close-btn" id="close-orders-modal" title="Close">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+
+      <div class="orders-modal-body" id="orders-list-container">
+        <!-- Rendered dynamically -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Notification Container -->
+  <div class="toast-container" id="toast-container"></div>
+
+  <!-- Scripts -->
+  <script src="js/api.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/cart.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

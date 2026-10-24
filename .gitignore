@@ -1,0 +1,18 @@
+# Dependencies
+node_modules/
+
+# Environment Variables
+.env
+
+# Database (auto-generated & seeded on startup)
+data/*.db
+data/*.db-journal
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# System files
+.DS_Store
+Thumbs.db
