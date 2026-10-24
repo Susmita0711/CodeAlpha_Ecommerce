@@ -1,4 +1,4 @@
-# 🇮🇳 BharatKart — India's Tech & Lifestyle Store
+# BharatKart — India's Tech & Lifestyle Store
 
 > **Fullstack Web Development Internship Project for CodeAlpha**  
 > Developed with HTML5, Vanilla CSS3, JavaScript (ES6+), Node.js, Express.js, and SQLite3.
@@ -57,6 +57,11 @@
 | **Backend** | Node.js, Express.js (REST API, static file serving) |
 | **Database** | SQLite3 (`data/ecommerce.db`) |
 | **Security** | `bcryptjs` password hashing, `jsonwebtoken` (JWT) authentication, `cors` |
+
+## 🖼️ Interface 
+<img width="1846" height="887" alt="image" src="https://github.com/user-attachments/assets/a99d5445-6930-4040-8d6a-b0a75d4fd43d" />
+<img width="1867" height="902" alt="image" src="https://github.com/user-attachments/assets/fdecd312-11ba-4f41-8400-a4137fbd3317" />
+
 
 ---
 
