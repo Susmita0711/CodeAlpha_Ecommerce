@@ -96,9 +96,31 @@ const auth = {
       }
     } catch (err) {
       const errorEl = document.getElementById('register-error-msg');
-      if (errorEl) errorEl.textContent = err.message || 'Registration failed.';
+      if (errorEl) {
+        if (err.message && err.message.toLowerCase().includes('already exists')) {
+          errorEl.innerHTML = `
+            <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 6px;">
+              <span>An account with this email already exists!</span>
+              <button type="button" class="btn btn-xs btn-primary" onclick="auth.switchToSignInWithEmail('${email}')">
+                Sign In Now →
+              </button>
+            </div>
+          `;
+        } else {
+          errorEl.textContent = err.message || 'Registration failed.';
+        }
+      }
       return false;
     }
+  },
+
+  switchToSignInWithEmail(email) {
+    this.switchTab('login');
+    const loginEmail = document.getElementById('login-email');
+    const loginPass = document.getElementById('login-password');
+    if (loginEmail && email) loginEmail.value = email;
+    if (loginPass) loginPass.focus();
+    app.showToast('Switched to Sign In. Enter your password to log in.', 'info');
   },
 
   logout() {
